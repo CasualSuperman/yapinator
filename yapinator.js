@@ -755,6 +755,8 @@
 				if ( !selector || typeof selector !== "string" ) {
 					return [];
 				}
+				// save old selector for cache lookups
+				var oldSelector = selector;
 				// clean selector
 				selector = cleaner.clean(selector);
 				var m, set;
@@ -816,7 +818,7 @@
 						cleaner.cleanElem( set );
 					}
 				}
-				return !noCache ? cache[ selector ] = set: set;
+				return !noCache ? cache[ oldSelector ] = set: set;
 			},
 			Loader: function (){
 				DOMChngEvent();
