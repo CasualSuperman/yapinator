@@ -739,6 +739,12 @@
 			version: version,
 			// main selector function
 			select: function( selector, root, noCache, loop, nthrun ) {
+				// selector must be string
+				if ( !selector || typeof selector !== "string" ) {
+					return [];
+				}
+				// clean selector
+				selector = cleaner.clean(selector);
 				// Return cache if exists
 				// Return no cached result if root specified
 				if ( cache[ selector ] && !noCache && !root ) {
@@ -751,12 +757,6 @@
 				// root must be either a elementNode(1) or an documentNode(9)
 				if ( root.nodeType !== 1 && root.nodeType !== 9 )
 					return [];
-				// selector must be string
-				if ( !selector || typeof selector !== "string" ) {
-					return [];
-				}
-				// clean selector
-				selector = cleaner.clean(selector);
 				var m, set;
 				// qucik selection - only ID, CLASS TAG, and ATTR for the very first occurence
 				if ( ( m = selectors.reg.sharpTest.exec( selector ) ) !== null ) {
